@@ -45,7 +45,7 @@ fun WordGameStatisticScreen(navController: NavController, user: User, viewModel:
             TopAppBar(
                 title = { Text("Word Game Statistics") },
                 navigationIcon = {
-                    IconButton(onClick = { navController.navigate("profile/${user.id}") }) {
+                    IconButton(onClick = { navController.navigate("statistics/${user.id}") }) {
                         Icon(
                             imageVector = ImageVector.vectorResource(id = R.drawable.ic_arrow_back),
                             contentDescription = "Back"

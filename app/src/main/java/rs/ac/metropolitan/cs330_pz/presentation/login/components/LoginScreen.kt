@@ -27,11 +27,11 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import rs.ac.metropolitan.cs330_pz.R
-import rs.ac.metropolitan.cs330_pz.presentation.login.UserViewModel
+import rs.ac.metropolitan.cs330_pz.presentation.login.LoginViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(navController: NavController, userViewModel: UserViewModel = viewModel()) {
+fun LoginScreen(navController: NavController, loginViewModel: LoginViewModel = viewModel()) {
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     val context = LocalContext.current
@@ -74,7 +74,7 @@ fun LoginScreen(navController: NavController, userViewModel: UserViewModel = vie
             )
             Spacer(modifier = Modifier.height(16.dp))
             Button(onClick = {
-                userViewModel.getUserByUsernameAndPassword(username, password) { user ->
+                loginViewModel.getUserByUsernameAndPassword(username, password) { user ->
                     if (user != null) {
                         navController.navigate("home/${user.id}")
                         Toast.makeText(context, "Login Successful", Toast.LENGTH_LONG).show()

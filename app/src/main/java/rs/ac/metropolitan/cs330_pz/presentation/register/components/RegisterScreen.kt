@@ -29,12 +29,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import rs.ac.metropolitan.cs330_pz.R
 import rs.ac.metropolitan.cs330_pz.data.db.entity.User
-import rs.ac.metropolitan.cs330_pz.presentation.login.UserViewModel
+import rs.ac.metropolitan.cs330_pz.presentation.register.RegisterViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun RegisterScreen(navController: NavController, userViewModel: UserViewModel = viewModel()) {
+fun RegisterScreen(navController: NavController, registerViewModel: RegisterViewModel = viewModel()) {
     var email by remember { mutableStateOf("") }
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -89,10 +89,10 @@ fun RegisterScreen(navController: NavController, userViewModel: UserViewModel = 
             Button(onClick = {
                 val user =
                     User(email = email, username = username, password = password)
-                userViewModel.insert(user) { userId ->
+                registerViewModel.insert(user) { userId ->
                     if (userId > 0) {
                         Toast.makeText(context, "Registration Successful", Toast.LENGTH_LONG).show()
-                        navController.navigate("login")  // Navigacija nazad na login ekran
+                        navController.navigate("login")
                     } else {
                         Toast.makeText(context, "Registration Failed", Toast.LENGTH_LONG).show()
                     }

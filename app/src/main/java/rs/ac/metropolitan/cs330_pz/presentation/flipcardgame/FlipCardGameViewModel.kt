@@ -10,9 +10,11 @@ import kotlinx.coroutines.launch
 import rs.ac.metropolitan.cs330_pz.R
 import rs.ac.metropolitan.cs330_pz.data.db.entity.FlipCardStatistic
 import rs.ac.metropolitan.cs330_pz.data.db.entity.User
-import rs.ac.metropolitan.cs330_pz.data.repository.FlipCardStatisticRepository
+import rs.ac.metropolitan.cs330_pz.domain.use_case.flipcard_use_case.insert_statistic.InsertStatisticUseCase
 
-class FlipCardGameViewModel(private val statisticRepository: FlipCardStatisticRepository) : ViewModel() {
+class FlipCardGameViewModel(
+    private val insertStatisticUseCase: InsertStatisticUseCase
+) : ViewModel() {
     private val images = listOf(
         R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4,
         R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4
@@ -89,7 +91,7 @@ class FlipCardGameViewModel(private val statisticRepository: FlipCardStatisticRe
                 clickCount = clickCount
             )
             viewModelScope.launch {
-                statisticRepository.insertStatistic(statistic)
+                insertStatisticUseCase(statistic)
             }
         }
     }

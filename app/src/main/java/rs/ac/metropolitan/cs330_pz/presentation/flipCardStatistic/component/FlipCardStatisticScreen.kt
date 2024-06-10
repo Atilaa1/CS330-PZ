@@ -27,9 +27,9 @@ fun FlipCardStatisticScreen(navController: NavController, user: User, viewModel:
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Profile") },
+                title = { Text("FlipCard Statistics") },
                 navigationIcon = {
-                    IconButton(onClick = { navController.navigate("profile/${user.id}") }) {
+                    IconButton(onClick = { navController.navigate("statistics/${user.id}") }) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
                             contentDescription = "Back"

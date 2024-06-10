@@ -6,21 +6,14 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import rs.ac.metropolitan.cs330_pz.data.api.RandomWordApi
 import rs.ac.metropolitan.cs330_pz.data.db.entity.WordGameStatistic
-import rs.ac.metropolitan.cs330_pz.data.repository.WordGameStatisticRepository
+import rs.ac.metropolitan.cs330_pz.domain.use_case.word_game_statistic.insert.InsertWordGameStatisticUseCase
+import rs.ac.metropolitan.cs330_pz.domain.use_case.word_use_case.fetch_use_case.FetchWordsUseCase
 
-
-class WordGameViewModel(private val repository:WordGameStatisticRepository) : ViewModel() {
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("https://random-word-api.herokuapp.com")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-
-    private val api = retrofit.create(RandomWordApi::class.java)
-
+class WordGameViewModel(
+    private val fetchWordsUseCase: FetchWordsUseCase,
+    private val insertWordGameStatisticUseCase: InsertWordGameStatisticUseCase
+) : ViewModel() {
     var words by mutableStateOf(listOf<String>())
     var userGuesses by mutableStateOf(listOf<String>())
     var incorrectGuesses by mutableStateOf(listOf<String>())
@@ -28,7 +21,7 @@ class WordGameViewModel(private val repository:WordGameStatisticRepository) : Vi
 
     fun fetchWords(number: Int) {
         viewModelScope.launch {
-            words = api.getWords(number)
+            words = fetchWordsUseCase(number)
         }
     }
 
@@ -43,6 +36,7 @@ class WordGameViewModel(private val repository:WordGameStatisticRepository) : Vi
     fun checkScore() {
         score = userGuesses.count { it in words }
     }
+
     fun saveStatistic(userId: Int, numberOfGuessingWords: Int) {
         val statistic = WordGameStatistic(
             userId = userId,
@@ -50,7 +44,7 @@ class WordGameViewModel(private val repository:WordGameStatisticRepository) : Vi
             score = score
         )
         viewModelScope.launch {
-            repository.insert(statistic)
+            insertWordGameStatisticUseCase(statistic)
         }
     }
 }
