@@ -50,9 +50,7 @@ android {
         }
     }
 }
-
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -62,46 +60,51 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
-    //LiveData
+    // LiveData
     implementation(libs.livedata.ktx)
     implementation(libs.livedata.runtime)
     implementation(libs.compose.livedata)
-    //View Model
+
+    // ViewModel
     implementation(libs.viewModel.compose)
     implementation(libs.viewModel.ktx)
     implementation(libs.navigation.compose)
-    //Hilt
+
+    // Hilt
     implementation(libs.hilt)
     implementation(libs.androidx.lifecycle.runtime.compose.android)
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
-    //Room
+
+    // Room
     implementation(libs.room)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
-    //Coil
+
+    // Coil
     implementation(libs.coil)
     implementation(libs.coil.compose)
 
+    // Testing
 
     testImplementation(libs.junit)
     testImplementation(libs.hilt.testing)
     kspTest(libs.hilt.compiler)
-    //    testImplementation(libs.robolectric)
-
+    // testImplementation(libs.robolectric)
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     androidTestImplementation(libs.hilt.testing)
+ 
     kspAndroidTest(libs.hilt.compiler)
-    //    androidTestImplementation(libs.robolectric)
+    // androidTestImplementation(libs.robolectric)
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-
+    // Networking
     implementation(libs.google.gson)
     implementation(libs.square.retrofit)
     implementation(libs.square.retrofit.converter.gson)

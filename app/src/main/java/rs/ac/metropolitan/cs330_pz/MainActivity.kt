@@ -56,9 +56,9 @@ class MainActivity : ComponentActivity() {
         val userRepositoryImpl = UserRepositoryImpl(database.userDao())
         val flipCardStatisticRepositoryImpl = FlipCardStatisticRepositoryImpl(database.flipCardStatisticDao())
         val wordGameStatisticRepositoryImpl = WordGameStatisticRepositoryImpl(database.wordGameStatisticDao())
-        val randomWordApi = RandomWordApi.create()  // Assuming you have a function to create the API instance
+        val randomWordApi = RandomWordApi.create()
 
-        // Initialize use cases
+
         val getUserByUsernameAndPasswordUseCase = GetUserByUsernameAndPasswordUseCase(userRepositoryImpl)
         val getUserByIdUseCase = GetUserByIdUseCase(userRepositoryImpl)
         val insertUserUseCase = InsertUserUseCase(userRepositoryImpl)
@@ -69,7 +69,7 @@ class MainActivity : ComponentActivity() {
         val insertStatisticUseCase= InsertStatisticUseCase(flipCardStatisticRepositoryImpl)
         val getStatisticByUserIdUseCase = GetStatisticByUserIdUseCase(flipCardStatisticRepositoryImpl)
 
-        // Initialize ViewModel factories with use cases
+
         val loginViewModelFactory = LoginViewModelFactory(getUserByUsernameAndPasswordUseCase, getUserByIdUseCase)
         val registerViewModelFactory = RegisterViewModelFactory(insertUserUseCase)
         val wordGameViewModelFactory = WordGameViewModelFactory(fetchWordsUseCase, insertWordGameStatisticUseCase)
